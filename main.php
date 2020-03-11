@@ -10,8 +10,9 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-	<p><b>Результат преобразования:</b>
+	<p>Результат преобразования:
 		<?php
+			// Проверка запроса
 			$text = '*Строка пуста*';
 			if ($_SERVER["REQUEST_METHOD"] == "POST") {
 				$text = test_input($_POST["comment"]);
@@ -25,13 +26,14 @@
 					$arr[$i] = mb_strtoupper($arr[$i]);
 				}
 				// Подсчет количества букв "о" и "О"
-				for ($j = 0; $j < strlen($arr[$i]); $j++) {
+				for ($j = 0; $j < mb_strlen($arr[$i]); $j++) {
 					if ($arr[$i][$j] == 'o' || $arr[$i][$j] == 'O') {
 						$count++;
 					}
 				}
+				// Оборачивание каждой третьей буквы в span
 				$temp = '';
-				for ($j = 0; $j < strlen($arr[$i]); $j++) {
+				for ($j = 0; $j < mb_strlen($arr[$i]); $j++) {
 					if ($j%3 == 2) {
 						$temp = $temp.'<span style="color:purple;">'.$arr[$i][$j].'</span>';
 					} else {
@@ -43,9 +45,11 @@
 
 			echo '<p class="output">'.implode(' ', $arr).'</p>';
 			echo '<p>Количество букв "о" и "О": '.$count.'</p>';
+
 			function test_input($data) {
 				$data = trim($data);
 				$data = stripcslashes($data);
+				$data = strip_tags($data);
 				$data = htmlspecialchars($data);
 				return $data;
 			}

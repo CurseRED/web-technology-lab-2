@@ -12,6 +12,7 @@
 <body>
 	<ul>
 	<?php
+		// Проверка запроса
 		$input = '';
 		if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["button"])) {
 			$input = test_input($_GET["button"]);
@@ -20,6 +21,7 @@
 		$about = $services = $price = $contacts = '';
 		$color = 'white';
 
+		// Выбор цвета в зависимости от запроса
 		if ($input == 'about') {
 			$about = 'style="background-color:'.$color.'"';
 		} elseif ($input == 'services') {
@@ -38,6 +40,7 @@
 		function test_input($data) {
 			$data = trim($data);
 			$data = stripcslashes($data);
+			$data = strip_tags($data);
 			$data = htmlspecialchars($data);
 			return $data;
 		}
