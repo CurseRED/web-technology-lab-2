@@ -27,7 +27,7 @@
 				}
 				// Подсчет количества букв "о" и "О"
 				for ($j = 0; $j < mb_strlen($arr[$i]); $j++) {
-					if ($arr[$i][$j] == 'o' || $arr[$i][$j] == 'O') {
+					if ($arr[$i][$j] == 'o' || $arr[$i][$j] == 'O' || mb_substr($arr[$i], $j, 1) == 'о' || mb_substr($arr[$i], $j, 1) == 'О') {
 						$count++;
 					}
 				}
@@ -35,9 +35,9 @@
 				$temp = '';
 				for ($j = 0; $j < mb_strlen($arr[$i]); $j++) {
 					if ($j%3 == 2) {
-						$temp = $temp.'<span style="color:purple;">'.$arr[$i][$j].'</span>';
+						$temp = $temp.'<span style="color:purple;">'.mb_substr($arr[$i], $j, 1).'</span>';
 					} else {
-						$temp = $temp.$arr[$i][$j];
+						$temp = $temp.mb_substr($arr[$i], $j, 1);
 					}
 				}
 				$arr[$i] = $temp;
