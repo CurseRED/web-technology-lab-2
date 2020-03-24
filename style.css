@@ -33,16 +33,17 @@ a {
 	display: flex;
 	text-decoration: none;
 	text-transform: uppercase;
-	padding: 4px;
+	padding: 8px;
 	font-size: 24px;
 	min-width: 256px;
 	min-height: 48px;
-	border: 4px solid black;
-	background-color: grey;
-	border-radius: 8px;
+	border: 0;
+	background: linear-gradient(to left, #00E7F7, #00C2F1);
+	border-radius: 128px;
 	justify-content: center;
 	align-items: center;
 	color: black;
+	font-family: verdana, arial, helvetica;
 }
 
 form {
@@ -51,14 +52,19 @@ form {
 	align-items: center;
 	margin: 16px;
 	width: 100%;
-	font-size: 16px;
+	font-family: verdana, arial, helvetica;
 }
 
 textarea {
 	width: 100%;
 	height: 128px;
 	margin: 8px 0;
-	font-size: 16px;
+	font-family: verdana, arial, helvetica;
+}
+
+input {
+	margin: 8px 0;
+	font-family: verdana, arial, helvetica;
 }
 
 .output {

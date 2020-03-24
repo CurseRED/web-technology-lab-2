@@ -7,7 +7,7 @@
 	<meta name="author" content="maksim">
 	<meta name="description" content="Page with PHP algorithms">
 	<meta name="keywords" content="php, algorithm, test, input">
-	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="../style.css">
 </head>
 <body>
 	<p>Результат преобразования:
@@ -55,6 +55,6 @@
 			}
 		?>
 	</p>
-	<a href="/index.html">Вернуться к форме</a>	
+	<a href="./lab2.html">Вернуться к форме</a>	
 </body>
 </html>
