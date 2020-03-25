@@ -39,7 +39,7 @@
 	<form action="./main.php" method="get" accept-charset="utf-8">
 		<label>Введите дату рождения:</label>
 		<input type="date" name="date" <?php if ($input == "1") echo 'style="background-color: red"'; if ($input == "2") echo 'value='.$value;?>></input>
-		<label>Возраст через N дней:</label>
+		<label>Дата когда вам будет N дней:</label>
 		<input type="number" name="number" <?php if ($input == "2") echo 'style="background-color: red"'; if ($input == "1") echo 'value='.$value;?>></input>
 		<input type="submit" value="Вычислить">
 	</form>
