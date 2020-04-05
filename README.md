@@ -1,1 +1,1 @@
-# web-technology-lab-2
+# web-technology-labs
