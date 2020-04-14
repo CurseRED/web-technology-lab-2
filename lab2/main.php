@@ -10,14 +10,22 @@
 	<link rel="stylesheet" type="text/css" href="../style.css">
 </head>
 <body>
-	<p>Результат преобразования:</p>
-		<?php
-			// Проверка запроса
-			$text = '*Строка пуста*';
-			if ($_SERVER["REQUEST_METHOD"] == "POST") {
-				$text = test_input($_POST["comment"]);
-			}
-
+	<?php
+		function test_input($data) {
+			$data = trim($data);
+			$data = stripcslashes($data);
+			$data = strip_tags($data);
+			$data = htmlspecialchars($data);
+			return $data;
+		}
+		// Проверка запроса
+		$text = '';
+		if ($_SERVER["REQUEST_METHOD"] == "POST") {
+			$text = test_input($_POST["comment"]);
+		}
+		if ($text == '') {
+			echo '<p style="text-align:center">Введите текст.</p>';
+		} else {
 			$arr = explode(' ', $text);
 			$count = 0;
 			// Выполнение преобразований над каждым словом
@@ -43,17 +51,10 @@
 				$arr[$i] = $temp;
 			}
 
-			echo '<p class="output">'.implode(' ', $arr).'</p>';
-			echo '<p>Количество букв "о" и "О": '.$count.'</p>';
-
-			function test_input($data) {
-				$data = trim($data);
-				$data = stripcslashes($data);
-				$data = strip_tags($data);
-				$data = htmlspecialchars($data);
-				return $data;
-			}
-		?>
+			echo '<p style="text-align:center">Результат преобразования:</p><p class="output" style="text-align:center">'.implode(' ', $arr).'</p>';
+			echo '<p style="text-align:center">Количество букв "о" и "О": '.$count.'</p>';
+		}
+	?>
 	<a href="./lab2.html">Вернуться к форме</a>	
 </body>
 </html>
