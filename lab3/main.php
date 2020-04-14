@@ -10,15 +10,17 @@
 	<link rel="stylesheet" type="text/css" href="../style.css">
 </head>
 <body>
-	<p>
-		<?php
-			$date1 = '';
-			$num = '';
-			// Проверка запроса и получение аргументов
-			if ($_SERVER["REQUEST_METHOD"] == "GET") {
-				$date1 = $_GET["date"];
-				$num = $_GET["number"];
-			}
+	<?php
+		$date1 = '';
+		$num = '';
+		// Проверка запроса и получение аргументов
+		if ($_SERVER["REQUEST_METHOD"] == "GET") {
+			$date1 = $_GET["date"];
+			$num = $_GET["number"];
+		}
+		if ($date1 == '' || $num == '') {
+			echo '<p>Введите дату и количество дней.</p>';
+		} else {
 			$datetime1 = date_create(date('d-m-Y'));
 			$datetime2 = date_create($date1);
 			// Проверка ввода
@@ -36,12 +38,12 @@
 			$interval = date_diff($datetime2, $datetime1);
 			$string = $interval->format('Возраст: %d дня(ей) %m месяц(ев) %y лет(год)');
 			fwrite($fp, 'Вывод: '.$string.' ');
-			echo $string.'<br>';
+			echo '<p>'.$string.'</p>';
 			// Добавляем к дате рождения N дней
 			date_add($datetime2, date_interval_create_from_date_string($num.' days'));
 			$string = $datetime2->format('d-m-y вам будет '.$num.' дня(ей)');
 			fwrite($fp, $string.' ');
-			echo $string.' ';
+			echo '<p>'.$string.'</p>';
 			$arr = ['Обезьяны', 'Петуха', 'Собаки',
 					'Свиньи', 'Крысы', 'Быка',
 					'Тигра', 'Кролика', 'Дракона',
@@ -49,10 +51,10 @@
 			// Определяем год человека
 			$string = 'Вы родились в год '.$arr[(date_create($date1)->format('Y'))%12];
 			fwrite($fp, $string.PHP_EOL);
-			echo '<br>'.$string;
+			echo '<p>'.$string.'</p>';
 			fclose($fp);
-		?>
-	</p>
+		}
+	?>
 	<a href="./lab3.php">Вернуться к форме</a>	
 </body>
 </html>

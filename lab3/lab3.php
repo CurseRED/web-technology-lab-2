@@ -42,4 +42,7 @@
 		<input type="submit" value="Вычислить">
 	</form>
 </body>
+<footer>
+	<script> </script>
+</footer>
 </html>

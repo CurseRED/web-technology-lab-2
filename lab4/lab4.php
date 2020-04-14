@@ -14,7 +14,10 @@
 	<form action="./main.php" method="get" accept-charset="utf-8">
 		<label>Введите слова или словосочетания в двойных кавычках, которые хотите найти в тексте:</label>
 		<textarea name="comment"></textarea>
-		<input type="submit" value="Вычислить">
+		<input type="submit" value="Найти">
 	</form>
 </body>
+<footer>
+	<script> </script>
+</footer>
 </html>
