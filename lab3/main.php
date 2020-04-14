@@ -19,7 +19,7 @@
 			$num = $_GET["number"];
 		}
 		if ($date1 == '' || $num == '') {
-			echo '<p>Введите дату и количество дней.</p>';
+			echo '<p style="text-align:center">Введите дату и количество дней.</p>';
 		} else {
 			$datetime1 = date_create(date('d-m-Y'));
 			$datetime2 = date_create($date1);
@@ -38,12 +38,12 @@
 			$interval = date_diff($datetime2, $datetime1);
 			$string = $interval->format('Возраст: %d дня(ей) %m месяц(ев) %y лет(год)');
 			fwrite($fp, 'Вывод: '.$string.' ');
-			echo '<p>'.$string.'</p>';
+			echo '<p style="text-align:center">'.$string.'</p>';
 			// Добавляем к дате рождения N дней
 			date_add($datetime2, date_interval_create_from_date_string($num.' days'));
 			$string = $datetime2->format('d-m-y вам будет '.$num.' дня(ей)');
 			fwrite($fp, $string.' ');
-			echo '<p>'.$string.'</p>';
+			echo '<p style="text-align:center">'.$string.'</p>';
 			$arr = ['Обезьяны', 'Петуха', 'Собаки',
 					'Свиньи', 'Крысы', 'Быка',
 					'Тигра', 'Кролика', 'Дракона',
@@ -51,7 +51,7 @@
 			// Определяем год человека
 			$string = 'Вы родились в год '.$arr[(date_create($date1)->format('Y'))%12];
 			fwrite($fp, $string.PHP_EOL);
-			echo '<p>'.$string.'</p>';
+			echo '<p style="text-align:center">'.$string.'</p>';
 			fclose($fp);
 		}
 	?>
