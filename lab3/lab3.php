@@ -19,12 +19,11 @@
 			$value = test_input($_GET["value"]);
 		}
 	?>
-	<p>
 	<?php
 		if ($input == "1") {
-			echo 'Введите правильную дату!';
+			echo '<p>'.'Введите правильную дату!'.'</p>';
 		} elseif ($input == "2") {
-			echo 'Введите положительное число!';
+			echo '<p>'.'Введите положительное число!'.'</p>';
 		}
 
 		function test_input($data) {
@@ -35,7 +34,6 @@
 			return $data;
 		}
 	?>
-	</p>
 	<form action="./main.php" method="get" accept-charset="utf-8">
 		<label>Введите дату рождения:</label>
 		<input type="date" name="date" <?php if ($input == "1") echo 'style="background-color: red"'; if ($input == "2") echo 'value='.$value;?>></input>

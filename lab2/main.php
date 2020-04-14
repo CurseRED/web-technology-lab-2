@@ -10,7 +10,7 @@
 	<link rel="stylesheet" type="text/css" href="../style.css">
 </head>
 <body>
-	<p>Результат преобразования:
+	<p>Результат преобразования:</p>
 		<?php
 			// Проверка запроса
 			$text = '*Строка пуста*';
@@ -54,7 +54,6 @@
 				return $data;
 			}
 		?>
-	</p>
 	<a href="./lab2.html">Вернуться к форме</a>	
 </body>
 </html>
