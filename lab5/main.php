@@ -50,46 +50,40 @@
         $connection->query("SET CHARACTER SET 'UTF8'");
         $connection->query("SET CHARSET 'UTF8'");
         $connection->query("SET NAMES 'UTF8'");
+        // Обработка нажатия кнопки удалить
         if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["id"]) && isset($_GET['delete'])) {
             $id = $_GET["id"];
             $query = "DELETE FROM books WHERE id=$id";
             if ($connection->query($query) !== TRUE) {
-                echo "<p>Ошибка при удалении записи!</p>" . $connection->error;
+                echo "<p>Ошибка при удалении записи! (" . $connection->error . ")</p>";
             }
         }
+        // Обработка нажатия кнопки добавить/обновить
         if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["id"])
                 && isset($_GET["title"])
                 && isset($_GET["genre"])
                 && isset($_GET["author_id"])
-                && isset($_GET['update'])) {
+                && (isset($_GET['update'])) || (isset($_GET['add']))) {
             $id = $_GET["id"];
             $title = $_GET["title"];
             $genre = $_GET["genre"];
             $author_id = $_GET["author_id"];
-            $query = "UPDATE books SET id='$id', title='$title', genre='$genre', author_id='$author_id' WHERE id=$id";
-            if ($connection->query($query) === TRUE) {
-            } else {
-                echo "<p>Ошибка при обновлении записи!</p>" . $connection->error;
+            $query = '';
+            if (isset($_GET['update']))
+                $query = "UPDATE books SET id='$id', title='$title', genre='$genre', author_id='$author_id' WHERE id=$id";
+            else
+                $query = "INSERT INTO books (id, title, genre, author_id) VALUES ('$id', '$title', '$genre', '$author_id')";
+            if ($connection->query($query) !== TRUE) {
+                echo "<p>Ошибка при добавлении/обновлении записи! (" . $connection->error . ")</p>";
             }
         }
-        if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["id"])
-                && isset($_GET["title"])
-                && isset($_GET["genre"])
-                && isset($_GET["author_id"])
-                && isset($_GET['add'])) {
-            $id = $_GET["id"];
-            $title = $_GET["title"];
-            $genre = $_GET["genre"];
-            $author_id = $_GET["author_id"];
-            $query = "INSERT INTO books (id, title, genre, author_id) VALUES ('$id', '$title', '$genre', '$author_id')";
-            if ($connection->query($query) === TRUE) {
-            } else {
-                echo "<p>Ошибка при добавлении записи!</p>" . $connection->error;
-            }
-        }
-        print_db($connection, 'books');
-        $connection->close();
 	?>
+    <div style="overflow-x: auto">
+        <?php
+            print_db($connection, 'books');
+            $connection->close();
+        ?>
+    </div>
 	<form method="get">
         <div class="db-control">
             <div class="db-field">

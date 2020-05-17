@@ -21,9 +21,9 @@
 	?>
 	<?php
 		if ($input == "1") {
-			echo '<p>'.'Введите правильную дату!'.'</p>';
+			echo '<p style="text-align:center">'.'Введите правильную дату!'.'</p>';
 		} elseif ($input == "2") {
-			echo '<p>'.'Введите положительное число!'.'</p>';
+			echo '<p style="text-align:center">'.'Введите положительное число!'.'</p>';
 		}
 
 		function test_input($data) {

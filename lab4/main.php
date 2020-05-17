@@ -16,7 +16,7 @@
 		mb_regex_encoding("UTF-8");
 		$string = '';
 		// Проверка запроса и получение аргументов
-		if ($_SERVER["REQUEST_METHOD"] == "GET") {
+		if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["comment"])) {
 			$string = $_GET["comment"];
 		}
 		$words = array();
@@ -39,8 +39,9 @@
 			// Удаление окончаний
 			for ($i = 0; $i < count($words_to_find); $i++) {
 				$flag = false;
+				$flag = false;
 				$matches = array();
-				preg_match_all('/ого|ями|ите|ишь|ете|ому|ему|ешь|его|ами|их|ых|ие|ые|им|ят|ым|ую|ет|ут|ют|ит|им|ат|юю|ее|яя|ая|ый|ий|ях|ах|ой|ое|ям|ам|ей|ов|а|ы|я|и|у|о|е|ю|ь/ui', $words_to_find[$i], $matches, PREG_OFFSET_CAPTURE);
+				preg_match_all('/ого|ями|ите|ишь|ете|ому|ему|ешь|его|ами|их|ых|ие|ые|им|ят|ым|ую|ет|ут|ют|ит|ат|юю|ее|яя|ая|ый|ий|ях|ах|ой|ое|ям|ам|ей|ов|а|ы|я|и|у|о|е|ю|ь/ui', $words_to_find[$i], $matches, PREG_OFFSET_CAPTURE);
 				for ($j = 0; $j < count($matches[0]); $j++) {
 					// Проверка что найдено окончание
 					if (mb_strlen($words_to_find[$i]) > mb_strlen($matches[0][$j][0]) && mb_strlen($words_to_find[$i]) == mb_strlen($matches[0][$j][0]) + intdiv($matches[0][$j][1], 2)) {
@@ -49,7 +50,7 @@
 					}
 				}
 				if ($flag == true) {
-					$words_sum[] = '/'.preg_quote($words_to_find[$i]).'(ого|ями|ите|ишь|ете|ому|ему|ешь|его|ами|их|ых|ие|ые|им|ят|ым|ую|ет|ут|ют|ит|им|ат|юю|ее|яя|ая|ый|ий|ях|ах|ой|ое|ям|ам|ей|ов|а|ы|я|и|у|о|е|ю|ь|)/ui';
+					$words_sum[] = '/'.preg_quote($words_to_find[$i]).'(ого|ями|ите|ишь|ете|ому|ему|ешь|его|ами|их|ых|ие|ые|им|ят|ым|ую|ет|ут|ют|ит|им|ат|юю|ее|яя|ая|ый|ий|ях|ах|ой|ое|ям|ам|ей|ов|а|ы|я|и|у|о|е|ю|ь)/ui';
 				} else {
 					$words_sum[] = '/'.preg_quote($words_to_find[$i]).'/ui';
 				}

@@ -40,14 +40,17 @@ body {
 	font-family: 'Montserrat', sans-serif;
 }
 
-p, label {
+p {
 	width: 100%;
 	margin: 8px;
-	text-align: justify;
 }
 
 label {
-	text-align: center;
+	display: flex;
+	width: 100%;
+	margin: 8px;
+	align-items: center;
+	text-align: right;
 }
 
 ul {
@@ -58,40 +61,34 @@ ul {
 	padding: 0;
 }
 
-a {
+a,
+input,
+button {
 	display: flex;
-	padding: 8px;
-	text-decoration: none;
-	background-color: transparent;
-	border: solid var(--nord0) 1px;
-	border-radius: 8px;
 	justify-content: center;
-	color: var(--nord0);
-	margin: 8px;
-	transition: border-color .5s ease 0s, color .5s ease 0s;
-}
-
-a:hover {
-	color: var(--nord9);
-	border-color: var(--nord9);
-}
-
-input {
 	font-size: var(--page-font-size);
 	font-family: 'Montserrat', sans-serif;
 	cursor: pointer;
-	display: flex;
 	padding: 8px;
+	margin: 8px;
 	text-decoration: none;
 	background-color: transparent;
 	border: solid var(--nord0) 1px;
 	border-radius: 8px;
 	text-align: center;
 	color: var(--nord0);
-	transition: .5s ease-in;
+	transition: border-color .5s ease 0s, color .5s ease 0s;
+	outline: none;
 }
 
-input:hover {
+input {
+	cursor: auto;
+	max-width: 128px;
+}
+
+a:hover,
+input:hover,
+button:hover {
 	color: var(--nord9);
 	border-color: var(--nord9);
 }
@@ -117,18 +114,52 @@ textarea {
 	box-sizing: border-box;
 }
 
-input {
-	font-size: var(--page-font-size);
-	font-family: 'Montserrat', sans-serif;
-	margin: 8px 0;
-	outline: none;
-}
-
 .output {
 	font-weight: bold;
+}
+
+.db-control {
+	display: flex;
+	width: 100%;
+	flex-wrap: wrap;
+	align-items: center;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.db-control > label {
+
+}
+
+.db-field {
+	display: flex;
+	flex-direction: row;
 }
 
 mark {
 	color: var(--nord6);
 	background-color: var(--nord0)
+}
+
+table {
+	width: 100%;
+}
+
+table, th, td {
+	border-collapse: collapse;
+	border: 1px solid var(--nord9);
+	text-align: center;
+}
+
+th, td {
+	padding: 8px;
+}
+
+th {
+	background-color: var(--nord4);
+}
+
+tr:hover {
+	transition: background-color .25s ease 0s;
+	background-color: var(--nord6);
 }
