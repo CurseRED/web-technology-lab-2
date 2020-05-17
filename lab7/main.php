@@ -31,15 +31,15 @@
         $headers .= "From: Maksim <max-cun4@yandex.ru>\r\n";
         $headers .= "Reply-To: max-cun4@yandex.ru\r\n";
         $headers .= "MIME-Version: 1.0\r\n";
-        $message = "This is multipart message using MIME\n";
+        $message = "This is multipart message using MIME\r\n";
         $message .= "------123\r\n";
         $message .= "Content-Type: text/plain; charset=UTF-8\r\n";
-        $message .= "Content-Transfer-Encoding: 7bit\r\n";
-        $message .= $text;
+        $message .= "Content-Transfer-Encoding: 7bit\r\n\r\n";
+        $message .= $text . "\r\n\r\n";
         $message .= "------123\r\n";
         $message .= "Content-Type: text/html; charset=UTF-8\r\n";
-        $message .= "Content-Transfer-Encoding: 7bit\r\n";
-        $message = '<html><body><p>' . $text . '</p></body></html>';
+        $message .= "Content-Transfer-Encoding: 7bit\r\n\r\n";
+        $message .= '<html><body><p>' . $text . '</p></body></html>' . "\r\n\r\n";
         $message .= "------123--\r\n";
         $to = '';
         if (count($emails) > 0){
