@@ -10,6 +10,7 @@
 	<link rel="stylesheet" type="text/css" href="../style.css">
 </head>
 <body>
+    <p><b>Вариант 2:</b> написать два скрипта, один из которых формирует произвольный набор данных (числа, строки, массивы) и передаёт их другому скрипту в сериализованной форме. Второй скрипт десериализует данные.</p>
     <?php
         function clear_cookie($key) {
             if (isset($_COOKIE[$key])) {
@@ -33,7 +34,6 @@
                 }
                 default:
                     return random_string(32);
-
             }
         }
         function random_string($n) {
@@ -47,14 +47,17 @@
         }
         function store_cookie($key, $value) {
             $data = serialize($value);
-            $data = gzcompress($data);
+            $data = gzcompress($data, 9);
             $data = base64_encode($data);
             setcookie($key, $data, time() + 3600, '/');
         }
         const AMOUNT_OF_DATA = 4;
-        if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["generate"]))
+        if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["generate"])) {
             for ($i = 0; $i < AMOUNT_OF_DATA; $i++)
+                // Генерация новых куки
                 store_cookie('cookie_' . $i, new_value());
+            echo '<p style="text-align: center">Куки сгенерированы!</p>';
+        }
     ?>
     <?php
         function fetch_cookie($key) {
@@ -67,26 +70,27 @@
                 return null;
         }
         if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["check"])) {
-            echo '<p>Куки пользователя:</p>';
             for ($i = 0; $i < AMOUNT_OF_DATA; $i++) {
+                // Получение куки
                 $value = fetch_cookie('cookie_'. $i);
                 if ($value == null)
-                    echo '<p>' . 'Куки с названием ' . 'cookie_'. $i . ' не установлен!' . '</p>';
+                    echo '<p style="text-align: center">' . 'Куки с названием ' . 'cookie_' . $i . ' не установлен!' . '</p>';
                 else if (is_array($value)) {
-                    echo '<p>' . 'Куки cookie_'. $i . '</p>';
-                    echo '<p>';
+                    echo '<p style="text-align: center">' . 'Куки cookie_'. $i . '</p>';
+                    echo '<p style="text-align: center"><b>';
                     print_r($value);
-                    echo '</p>';
+                    echo '</b></p>';
                 } else {
-                    echo '<p>'  . 'Куки cookie_'. $i . '</p>';
-                    echo '<p>' . $value . '</p>';
+                    echo '<p style="text-align: center">' . 'Куки cookie_'. $i . '</p>';
+                    echo '<p style="text-align: center"><b>' . $value . '</b></p>';
                 }
             }
         }
         if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["clear"])) {
             for ($i = 0; $i < AMOUNT_OF_DATA; $i++)
+                // Очистка куки
                 clear_cookie('cookie_' . $i);
-            echo '<p>Куки очищены!</p>';
+            echo '<p style="text-align: center">Куки очищены!</p>';
         }
     ?>
     <form class="db-control">
@@ -94,6 +98,7 @@
         <button type="submit" name="check">Просмотреть куки</button>
         <button type="submit" name="clear">Очистить куки</button>
     </form>
+    <a href="../index.html">На главную</a>
 </body>
 <footer>
 	<script> </script>

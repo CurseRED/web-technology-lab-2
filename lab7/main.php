@@ -21,16 +21,20 @@
             && isset($_GET["text"])) {
         $emails = explode(',', $_GET["email"]);
         $subject = $_GET["theme"];
+        $subj = '=?utf-8?B?'.base64_encode($subject).'?=';
         $text = $_GET["text"];
+        // Запись в файл данных
         $fp = fopen('log.txt', 'a' . PHP_EOL);
         fwrite($fp, 'Получатели: ' . implode(', ', $emails) . PHP_EOL);
         fwrite($fp, 'Тема: ' . $subject . PHP_EOL);
         fwrite($fp, 'Сообщение: ' . $text . PHP_EOL);
         fclose($fp);
+        // Формирование заголовков
         $headers  = "Content-Type: multipart/alternative; boundary=\"----123\"\r\n";
         $headers .= "From: Maksim <max-cun4@yandex.ru>\r\n";
         $headers .= "Reply-To: max-cun4@yandex.ru\r\n";
         $headers .= "MIME-Version: 1.0\r\n";
+        // Формирование сообщения из двух частей
         $message = "This is multipart message using MIME\r\n";
         $message .= "------123\r\n";
         $message .= "Content-Type: text/plain; charset=UTF-8\r\n";
@@ -44,9 +48,10 @@
         $to = '';
         if (count($emails) > 0){
             $to = $emails[0];
+            // Добавление нескольких получателей
             for ($i = 1; $i < count($emails); $i++)
                 $headers .= "Bcc: " . $emails[$i] . "\r\n";
-            if (mail($to, $subject, $message, $headers))
+            if (mail($to, $subj, $message, $headers))
                 echo '<p class="success">Письмо успешно отправлено!</p>';
             else
                 echo '<p class="error">Ошибка при отправке письма!</p>';
@@ -61,8 +66,9 @@
     <input type="text" name="theme" class="email-input" value="<?php echo $subject;?>"/>
     <label>Текст сообщения</label>
     <textarea name="text"><?php echo $text;?></textarea>
-    <input type="submit" value="Отправить">
+    <input class="form-button" type="submit" value="Отправить">
 </form>
+<a href="../index.html">На главную</a>
 </body>
 <footer>
     <script> </script>

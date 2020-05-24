@@ -24,7 +24,7 @@
 		preg_match_all('/(\".+\")|(\S+)/u', $string, $words, PREG_SET_ORDER);
 		// Проверка не пустой ли запрос
 		if (count($words) == 0) {
-			echo '<p style="text-align:center">Введите хоть одно слово или словосочетание для поиска.</p>';
+			echo '<p class="error" style="text-align:center">Введите хоть одно слово или словосочетание для поиска</p>';
 		} else {
 			$words_to_find = array();
 			$words_to_find_raw = array();

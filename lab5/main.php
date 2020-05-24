@@ -34,7 +34,7 @@
                 }
                 echo '</table>';
             } else
-                echo '<p>Нет результатов!</p>';
+                echo '<p class="error">Нет результатов!</p>';
         }
         $username = 'root';
         $servername = 'localhost';
@@ -55,7 +55,7 @@
             $id = $_GET["id"];
             $query = "DELETE FROM books WHERE id=$id";
             if ($connection->query($query) !== TRUE) {
-                echo "<p>Ошибка при удалении записи! (" . $connection->error . ")</p>";
+                echo "<p class=\"error\">Ошибка при удалении записи! (" . $connection->error . ")</p>";
             }
         }
         // Обработка нажатия кнопки добавить/обновить
@@ -74,7 +74,7 @@
             else
                 $query = "INSERT INTO books (id, title, genre, author_id) VALUES ('$id', '$title', '$genre', '$author_id')";
             if ($connection->query($query) !== TRUE) {
-                echo "<p>Ошибка при добавлении/обновлении записи! (" . $connection->error . ")</p>";
+                echo "<p class=\"error\">Ошибка при добавлении/обновлении записи! (" . $connection->error . ")</p>";
             }
         }
 	?>
@@ -109,6 +109,7 @@
 			<button type="submit" name="update">Изменить</button>
 		</div>
 	</form>
+    <a href="../index.html">На главную</a>
 </body>
 <footer>
 	<script> </script>

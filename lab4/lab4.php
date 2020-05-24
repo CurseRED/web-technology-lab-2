@@ -14,8 +14,9 @@
 	<form action="./main.php" method="get" accept-charset="utf-8">
 		<label>Введите слова или словосочетания в двойных кавычках, которые хотите найти в тексте:</label>
 		<textarea name="comment"></textarea>
-		<input type="submit" value="Найти">
+		<input class="form-button" type="submit" value="Найти">
 	</form>
+    <a href="../index.html">На главную</a>
 </body>
 <footer>
 	<script> </script>

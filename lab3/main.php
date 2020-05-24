@@ -19,7 +19,7 @@
 			$num = $_GET["number"];
 		}
 		if ($date1 == '' || $num == '') {
-			echo '<p style="text-align:center">Введите дату и количество дней.</p>';
+			echo '<p class="error" style="text-align:center">Введите дату и количество дней</p>';
 		} else {
 			$datetime1 = date_create(date('d-m-Y'));
 			$datetime2 = date_create($date1);

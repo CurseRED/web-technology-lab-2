@@ -24,7 +24,7 @@
 			$text = test_input($_POST["comment"]);
 		}
 		if ($text == '') {
-			echo '<p style="text-align:center">Введите текст.</p>';
+			echo '<p class="error" style="text-align:center">Введите текст</p>';
 		} else {
 			$arr = explode(' ', $text);
 			$count = 0;
@@ -55,6 +55,6 @@
 			echo '<p style="text-align:center">Количество букв "о" и "О": '.$count.'</p>';
 		}
 	?>
-	<a href="./lab2.html">Вернуться к форме</a>	
+	<a href="./lab2.html">Вернуться к форме</a>
 </body>
 </html>

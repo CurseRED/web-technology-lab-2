@@ -21,9 +21,9 @@
 	?>
 	<?php
 		if ($input == "1") {
-			echo '<p style="text-align:center">'.'Введите правильную дату!'.'</p>';
+			echo '<p class="error" style="text-align:center">'.'Введите правильную дату!'.'</p>';
 		} elseif ($input == "2") {
-			echo '<p style="text-align:center">'.'Введите положительное число!'.'</p>';
+			echo '<p class="error"     style="text-align:center">'.'Введите положительное число!'.'</p>';
 		}
 
 		function test_input($data) {
@@ -36,11 +36,12 @@
 	?>
 	<form action="./main.php" method="get" accept-charset="utf-8">
 		<label>Введите дату рождения:</label>
-		<input type="date" name="date" <?php if ($input == "1") echo 'style="background-color: red"'; if ($input == "2") echo 'value='.$value;?>></input>
+		<input type="date" name="date" <?php if ($input == "1") echo 'style="background-color: var(--nord11)"'; if ($input == "2") echo 'value='.$value;?>></input>
 		<label>Дата когда вам будет N дней:</label>
-		<input type="number" name="number" <?php if ($input == "2") echo 'style="background-color: red"'; if ($input == "1") echo 'value='.$value;?>></input>
-		<input type="submit" value="Вычислить">
+		<input type="number" name="number" <?php if ($input == "2") echo 'style="background-color: var(--nord11)"'; if ($input == "1") echo 'value='.$value;?>></input>
+		<input  class="form-button" type="submit" value="Вычислить">
 	</form>
+    <a href="../index.html">На главную</a>
 </body>
 <footer>
 	<script> </script>
