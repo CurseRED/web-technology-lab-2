@@ -17,6 +17,7 @@
     $count = 24;
     $max = 0;
     $a = array();
+    $flag = false;
     // Выбираем все за нужное количество часов, дней или недель в цикле
     if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["day"])) {
         $type = "последние 24 часа";
@@ -31,6 +32,7 @@
                 $max = $n;
             array_push($a, $n);
         }
+        $flag = true;
     }
     if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["week"])) {
         $type = "последнюю неделю";
@@ -45,6 +47,7 @@
                 $max = $n;
             array_push($a, $n);
         }
+        $flag = true;
     }
     if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["month"])) {
         $type = "последний месяц";
@@ -59,6 +62,7 @@
                 $max = $n;
             array_push($a, $n);
         }
+        $flag = true;
     }
     if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["year"])) {
         $type = "последний год";
@@ -73,24 +77,29 @@
                 $max = $n;
             array_push($a, $n);
         }
+        $flag = true;
     }
 ?>
 <div class="graph-container">
     <?php
-        echo "<p>Количество посетителей за $type ($x назад)</p>";
+        if ($flag)
+            echo "<p>Количество посетителей за $type ($x назад)</p>";
     ?>
     <div class="graph">
         <?php
-            for ($i = 0; $i < $count; $i++) {
-                $n = $a[$i];
-                $h = round(($n/$max)*100);
-                if ($h < 15)
-                    $h = 15;
-                $r = $count - $i;
-                echo "<div class='item-container'>$r";
-                echo "<div class='item' style='height: $h%'>$n</div>";
-                echo "</div>";
-            }
+            if ($flag) {
+                for ($i = 0; $i < $count; $i++) {
+                    $n = $a[$i];
+                    $h = round(($n / $max) * 100);
+                    if ($h < 15)
+                        $h = 15;
+                    $r = $count - $i;
+                    echo "<div class='item-container'>$r";
+                    echo "<div class='item' style='height: $h%'>$n</div>";
+                    echo "</div>";
+                }
+            } else
+                echo "<p style='display: flex; width: 100%; height: 100%; box-sizing: border-box; align-items: center; justify-content: center;'>Выберите период статистики</p>";
         ?>
     </div>
 </div>
